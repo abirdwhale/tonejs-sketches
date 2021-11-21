@@ -16,16 +16,16 @@ function song(time){
   console.log(time);
 }
 
-/* document.getElementById("play-button").addEventListener("click", function () {
+document.getElementById("play-button").addEventListener("click", function () {
   if (Tone.Transport.state !== "started") {
     Tone.Transport.start();
   } else {
     Tone.Transport.stop();
   }
-}); */
+});
 
 //attach a click listener to a play button
-document.querySelector('play-button')?.addEventListener('click', async () => {
-	await Tone.start()
+/* document.querySelector('play-button')?.addEventListener('click', async () => {
+	await Tone.Transport.start()
 	console.log('audio is ready')
-})
+}) */
