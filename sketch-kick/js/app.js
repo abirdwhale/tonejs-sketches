@@ -3,17 +3,20 @@ let bassSynth;
 
 function setup() {
   bassSynth = new Tone.MembraneSynth().toDestination();
-  
-  loopBeat = new Tone.Loop(song, "4n");
-  
+
+  loopBeat = new Tone.Loop(song, "16n");
+
   Tone.Transport.bpm.value = 140;
-  // Tone.Transport.start();
+  Tone.Transport.start();
   loopBeat.start(0);
 }
 
-function song(time){
-  bassSynth.triggerAttackRelease("c1", "8n", time)
-  console.log(time);
+function song(time) {
+  let currentBeat = split(Tone.Transport.position, ":");
+  if (currentBeat[1] == 0) {
+    bassSynth.triggerAttackRelease("c1", "8n", time, 1);
+  }
+  console.log(currentBeat);
 }
 
 document.getElementById("play-button").addEventListener("click", function () {
