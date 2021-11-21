@@ -1,18 +1,25 @@
-"use strict";
+let loopBeat;
+let bassSynth;
 
-const synth = new Tone.Synth().toDestination()
-synth.triggerAttackRelease('C4', '8n')
+function setup() {
+  bassSynth = new Tone.MembraneSynth().toDestination();
+  
+  loopBeat = new Tone.Loop(song, "4n");
+  
+  Tone.Transport.bpm.value = 140;
+  // Tone.Transport.start();
+  loopBeat.start(0);
+}
 
-document.getElementById("play-button").addEventListener("click", function() {
-  if (Tone.Transport.state !== 'started') {
+function song(time){
+  bassSynth.triggerAttackRelease("c1", "8n", time)
+  console.log(time);
+}
+
+document.getElementById("play-button").addEventListener("click", function () {
+  if (Tone.Transport.state !== "started") {
     Tone.Transport.start();
   } else {
     Tone.Transport.stop();
   }
 });
-
-function touchStarted() {
-  if (getAudioContext().state !== "running") {
-    getAudioContext().resume();
-  }
-}
