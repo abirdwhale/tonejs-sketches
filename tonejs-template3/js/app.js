@@ -15,7 +15,6 @@ Tone.Transport.scheduleRepeat(time => {
   repeat(time);
 }, '8n');
 
-console.log(Tone.Transport.bpm.value);
 // Tone.Transport.bpm.value = 120;
 
 function repeat(time) {
@@ -31,7 +30,6 @@ document.getElementById("play-button").addEventListener("click", function () {
   } else {
     Tone.Transport.stop();
   }
-  // synth.triggerAttackRelease('C4', '8n');
 });
 
 // setTimeout(() => {
