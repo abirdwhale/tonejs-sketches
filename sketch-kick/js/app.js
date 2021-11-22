@@ -1,18 +1,18 @@
 let loopBeat;
 let bassSynth;
 
-function setup() {
-  bassSynth = new Tone.MembraneSynth().toDestination();
 
-  loopBeat = new Tone.Loop(song, "16n");
+bassSynth = new Tone.MembraneSynth().toDestination();
 
-  Tone.Transport.bpm.value = 140;
-  Tone.Transport.start();
-  loopBeat.start(0);
-}
+loopBeat = new Tone.Loop(song, "16n");
+
+Tone.Transport.bpm.value = 140;
+Tone.Transport.start();
+loopBeat.start(0);
+
 
 function song(time) {
-  let currentBeat = split(Tone.Transport.position, ":");
+  let currentBeat = Tone.Transport.position.split(":");
   if (currentBeat[1] == 0) {
     bassSynth.triggerAttackRelease("c1", "8n", time, 1);
   }
