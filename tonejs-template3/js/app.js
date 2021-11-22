@@ -1,8 +1,10 @@
 console.clear();
 
 const synth = new Tone.Synth();
-
-synth.toDestination();
+synth.oscillator.type = "sine";
+const gain = new Tone.Gain(0.2);
+synth.connect(gain);
+gain.toDestination();
 
 const notes = [
   'C4', 'E4', 'G4',
