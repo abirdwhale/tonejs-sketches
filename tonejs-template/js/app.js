@@ -1,17 +1,15 @@
 let loopBeat;
 let bassSynth;
 
-function setup() {
-  bassSynth = new Tone.MembraneSynth().toDestination();
-  
-  loopBeat = new Tone.Loop(song, "4n");
-  
-  Tone.Transport.bpm.value = 140;
-  // Tone.Transport.start();
-  loopBeat.start(0);
-}
+bassSynth = new Tone.MembraneSynth().toDestination();
 
-function song(time){
+loopBeat = new Tone.Loop(song, "4n");
+
+Tone.Transport.bpm.value = 140;
+// Tone.Transport.start();
+loopBeat.start(0);
+
+function song(time) {
   bassSynth.triggerAttackRelease("c1", "8n", time)
   console.log(time);
 }
@@ -23,10 +21,3 @@ document.getElementById("play-button").addEventListener("click", function () {
     Tone.Transport.stop();
   }
 });
-
-//below does not work and i don't know why...
-//attach a click listener to a play button
-/* document.querySelector('button')?.addEventListener('click', async () => {
-	await Tone.start()
-	console.log('audio is ready')
-}) */
