@@ -1,5 +1,10 @@
+html, body {
+  height: 100%;
+}
+
 header {
   overflow: hidden;
+  height: 100%;
 }
 
 header input {
@@ -28,6 +33,7 @@ header input#chord-5:checked ~ ul label[for="chord-5"] {
 }
 
 header ul {
+  height: 100%;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -43,11 +49,29 @@ header ul li {
 }
 
 header ul li label {
+  height: 100%;
   display: block;
   cursor: pointer;
   text-align: center;
   padding: 0.5rem;
   background: black;
   color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  font-size: 3rem;
+}
+
+header ul li + li {
+  border-left: 4px solid #191919;
 }
 /*# sourceMappingURL=app.css.map */

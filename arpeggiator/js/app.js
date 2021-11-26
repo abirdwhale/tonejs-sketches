@@ -31,14 +31,15 @@ function handleChord(valueString) {
 }
 
 
-Tone.Transport.scheduleRepeat(onRepeat, '8n');
+Tone.Transport.scheduleRepeat(onRepeat, '16n');
 Tone.Transport.start();
+Tone.Transport.bpm.value = 90;
 
 function onRepeat(time) {
   let chord = chords[chordIdx],
     note = chord[step % chord.length];
 
-  synth.triggerAttackRelease(note, '8n', time);
+  synth.triggerAttackRelease(note, '16n', time);
   step++
 }
 
