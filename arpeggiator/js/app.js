@@ -2,38 +2,46 @@
 
 console.clear();
 
-const synths = [
-  new Tone.Synth(),
-  new Tone.Synth(),
-  new Tone.Synth()
-];
+const $inputs = document.querySelectorAll('input'),
+      chords = [
+        'A4 C5 E5', 'F4 A4 C5', 'G4 B4 D5',
+        'D4 F4 A4', 'E4 G4 B4' 
+      ].map(strong => strong.split(' '));
+let chordIdx = 0,
+    step = 0;
 
-synths[0].oscillator.type = 'triangle';
-synths[1].oscillator.type = 'sine';
-synths[2].oscillator.type = 'sawtooth';
-
-const gain = new Tone.Gain(0.6);
+const synth = new Tone.Synth(),
+      gain = new Tone.Gain(0.2);
+synth.oscillator.type = 'sine';
 gain.toDestination();
+synth.connect(gain);
 
-synths.forEach(synth => synth.connect(gain));
+// console.log(chords);
 
-const $rows = document.body.querySelectorAll('div > div'),
-      notes = ['G5', 'E4', 'C3'];
-let index = 0;
+Array.from($inputs).forEach($input => {
+  $input.addEventListener('change', () => {
+    if ($input.checked) handleChord($input.value);
+  })
+});
 
-Tone.Transport.scheduleRepeat(repeat, '8n');
-
-function repeat(time) {
-  let step = index % 8;
-  for (let i = 0; i < $rows.length; i++) {
-    let synth = synths[i],
-        note = notes[i],
-        $row = $rows[i],
-        $input = $row.querySelector(`input:nth-child(${step + 1})`);
-    if ($input.checked) synth.triggerAttackRelease(note, '8n', time);
-  }
-  index++;
+function handleChord(valueString) {
+  chordIdx = parseInt(valueString) - 1;
+  console.log(chordIdx);
+  
 }
+
+
+Tone.Transport.scheduleRepeat(onRepeat, '8n');
+Tone.Transport.start();
+
+function onRepeat(time) {
+  let chord = chords[chordIdx],
+      note = chord[step % 3];
+      
+      synth.triggerAttackRelease(note, '8n', time);
+      step++
+}
+
 
 document.getElementById("play-button").addEventListener("click", function () {
   if (Tone.Transport.state !== "started") {
